@@ -125,6 +125,7 @@ contains
 
         real(RealType) :: dt, dx, dy, dz, accx, accy, accz
         real(RealType) :: distance_sqr, distance_inv, distance_inv_cubed
+        integer :: cpu_start_total, cpu_finish_total, cpu_rate
         integer :: cpu_start, cpu_finish
         real :: total_time
         integer :: s, i, j
@@ -140,15 +141,14 @@ contains
 
         dt = self%tstep
 
-        total_time = 0.0
         ! loop across integration steps
+        call system_clock(cpu_start_total)
 
         do s = 1, self%nsteps
             call system_clock(cpu_start)
 
             ! calculate the acceleration for all particles
 
-            !do i = 1, self%npart
             do concurrent (i = 1: self%npart)
 
                 accx = self%particles(i)%acc(1)
@@ -189,13 +189,16 @@ contains
 
             end do
 
-            call system_clock(cpu_finish)
-            total_time = total_time + real(cpu_finish - cpu_start)/1000
-            print *, s, self%kenergy, real(cpu_finish - cpu_start)/1000
+            call system_clock(cpu_finish, cpu_rate)
+            total_time = real(cpu_finish - cpu_start)/cpu_rate
+            print *, s, self%kenergy, total_time
 
             self%kenergy = 0.0
 
         end do
+
+        call system_clock(cpu_finish_total, cpu_rate)
+        total_time = real(cpu_finish_total - cpu_start_total)/cpu_rate
 
         print *, ""
         print *, "Total Time (s): ", total_time
