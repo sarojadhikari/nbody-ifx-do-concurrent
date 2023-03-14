@@ -1,7 +1,7 @@
 # Testing Automatic Offload of `do concurrent`
 
 Here we will port the nbody sample code in oneAPI HPC Toolkit located at
-[`oneAPI-src/oneAPI-samples/DirectProgramming/DPC++/N-Body/Methods/Nbody`](https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/DPC%2B%2B/N-BodyMethods/Nbody) from `C++` to Fortran. 
+[`oneAPI-samples/DirectProgramming/C++SYCL/N-BodyMethods/Nbody/`](https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C%2B%2BSYCL/N-BodyMethods/Nbody) from `C++` to Fortran. 
 
 We will make use of a `DO CONCURRENT` loop and compile on Intel DevCloud to test `ifx` offload to Intel GPUs.
 
