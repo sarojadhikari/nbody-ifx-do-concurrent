@@ -11,6 +11,13 @@ the compiler options used are:
 
 `-qopenmp -fopenmp-target-do-concurrent`
 
+For `nvfortran` the following compiler options can be used following [https://developer.nvidia.com/blog/using-fortran-standard-parallel-programming-for-gpu-acceleration/]:
+```bash
+-stdpar=gpu,multicore -Minfo=accel
+```
+
+With the `-Minfo=accel` option, the `nvfortran` compiler prints information about the automatic paralization of `do concurrent` performed by the compiler. 
+
 ## Building and running on a Intel GPU on Intel DevCloud
 Assuming you have created an account on DevCloud, follow instructions similar to the steps in the [oneAPI Nbody sample](https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/DPC%2B%2B/N-BodyMethods/Nbody).
 
